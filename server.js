@@ -7,6 +7,11 @@ require('./db/db')  //step 2 -
 // set up the date connection in our main server file. 
 // server.js is executed by node, and all files will be linked to this
 
+// middleware will go below as needed
+
+
+// step 5: setting up the h
+
 
 
 
