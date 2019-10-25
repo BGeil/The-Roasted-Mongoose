@@ -1,7 +1,15 @@
-const express = require('express');
-const app = express();
-const PORT = 3000
+const express = require('express'); // step 1
+const app = express(); // step 1
+const PORT = 3000 // step 1
 
-app.listen(PORT, () => {
-	console.log('Server is listening on ' + PORT);	
+
+require('./db/db')  //step 2 -
+// set up the date connection in our main server file. 
+// server.js is executed by node, and all files will be linked to this
+
+
+
+
+app.listen(PORT, () => { // step 1
+	console.log('Server is listening on ' + PORT); // step 1
 })
