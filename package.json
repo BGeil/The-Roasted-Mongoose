@@ -1,0 +1,24 @@
+{
+  "name": "the-roasted-mongoose",
+  "version": "1.0.0",
+  "description": "# Recipes Full Stack Applicaton",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BGeil/The-Roasted-Mongoose.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BGeil/The-Roasted-Mongoose/issues"
+  },
+  "homepage": "https://github.com/BGeil/The-Roasted-Mongoose#readme",
+  "dependencies": {
+    "ejs": "^2.7.1",
+    "express": "^4.17.1"
+  }
+}
