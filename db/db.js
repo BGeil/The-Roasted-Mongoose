@@ -1,24 +1,24 @@
-const mongoose = require('mongoose'); //step 2
-// mongoose is an odm
-const connectionString = 'mongodb://localhost/rm'; //step 2
-// database name is blog
 
-// second argument, options subject, we set certa
-mongoose.connect(connectionString, { //step 2
+const mongoose = require(`mongoose`)
+
+const connectionString = `mongodb://localhost/roastedMongoose`
+
+mongoose.connect(connectionString, { 
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
-	useCreatedIndex: true,
-	useFindAndMody: false
+	useCreateIndex: true,
+	useFindAndModify: false
 });
 
-mongoose.connection.on('connected', () => { //step 2
-	console.log('Mongoose connected to', connectionString);
-});
 
-mongoose.connection.on('disconnected', () => { //step 2
-	console.log('Mongoose disconnected');
-});
+mongoose.connection.on(`connected`,() => {
+	console.log(`Mongoose is connected to ${connectionString}`);
+})
 
-mongoose.connection.on('error', (err) => { //step 2
-	console.log('Mongoose error: ', err);
+mongoose.connection.on(`disconnected`,() => {
+	console.log(`Mongoose is disconnected from ${connectionString}`);
+})
+
+mongoose.connection.on('error', (err) => {
+  console.log('Mongoose error: ', err);
 });
