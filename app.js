@@ -11,6 +11,12 @@ require(`./db/db.js`)
 app.use(express.static('public'))
 
 
+// controllers
+
+const userController = require(`./controllers/recipesController.js`);
+app.use(`/user` , userController);
+
+
 
 // Home page for Roasted Mongoose
 app.get(`/rm`, (req, res) => {
