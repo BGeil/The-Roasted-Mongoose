@@ -10,12 +10,13 @@ require('./db/db')  //step 2 -
 // middleware will go below as needed
 
 
+
+
+
 // step 4: home page route
 app.get('/', (req, res) => {
 	res.render('index.ejs')
 });
-
-
 
 
 app.listen(PORT, () => { // step 1
