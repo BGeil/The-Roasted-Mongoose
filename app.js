@@ -1,6 +1,7 @@
 const express = require(`express`)
 const app = express()
-
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
 // Database
 require(`./db/db.js`)
@@ -13,13 +14,13 @@ app.use(express.static('public'))
 
 // controllers
 
-const userController = require(`./controllers/recipesController.js`);
+const userController = require(`./controllers/usersController.js`);
 app.use(`/users` , userController);
 
 
 
 // Home page for Roasted Mongoose
-app.get(`/home`, (req, res) => {
+app.get(`/`, (req, res) => {
 	res.render(`index.ejs`)
 })
 

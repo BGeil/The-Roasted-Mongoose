@@ -10,7 +10,9 @@ router.get(`/login`, (req, res) => {
 
 
 
-
+router.get(`/register`, (req, res) => {
+	res.render(`users/register.ejs`)
+})
 
 
 
