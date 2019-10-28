@@ -4,9 +4,14 @@ const User = require(`../models/user`)
 
 
 
-router.get(`/new`, (req, res) => {
+router.get(`/login`, (req, res) => {
 	res.render(`users/login.ejs`)
 })
+
+
+
+
+
 
 
 module.exports = router;
