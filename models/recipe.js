@@ -3,7 +3,7 @@ const mongoose = require(`mongoose`)
 
 
 
-const CUISINES = [`ITALIAN`, `MEXICAN`, `CHINESE`, `JAPANESE`, `FRENCH`]
+const cuisines = [`ITALIAN`, `MEXICAN`, `CHINESE`, `JAPANESE`, `FRENCH`]
 
 
 
@@ -12,18 +12,16 @@ const recipeSchema = new mongoose.Schema({
 	recipeImg: String,
 	serves: Number,
 	cost: Number,
-	cuisineType: {type: String,  enum: CUISINES},
+	cuisineType: {type: String,  enum: cuisines},
 	instructions: [{type: String}],
-	author: {
-		type: mongoose.Schema.Types.ObjectId
+	user: [{
+		type: mongoose.Schema.Types.ObjectId,
 		ref: `User`
-	},
+	}],
+
 	// ingredients: //sub ingrediants schema
 
 })
-
-
-
 
 module.exports = mongoose.model(`Recipe`, recipeSchema)
 

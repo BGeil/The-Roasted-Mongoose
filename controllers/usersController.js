@@ -8,7 +8,7 @@ router.get(`/login`, (req, res) => {
 	res.render(`users/login.ejs`)
 })
 
-
+//router.post(`/login``)
 
 router.get(`/register`, (req, res) => {
 	res.render(`users/register.ejs`)

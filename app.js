@@ -16,6 +16,9 @@ app.use(express.static('public'))
 
 const userController = require(`./controllers/usersController.js`);
 app.use(`/users` , userController);
+const recipesController = require(`./controllers/recipesController.js`);
+app.use(`/recipes` , recipesController);
+
 
 
 
