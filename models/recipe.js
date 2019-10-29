@@ -1,10 +1,9 @@
 // Recipes Model
 const mongoose = require(`mongoose`)
-
+const Ingredient = require(`./ingredient.js`)
 
 
 const cuisines = [`ITALIAN`, `MEXICAN`, `CHINESE`, `JAPANESE`, `FRENCH`]
-
 
 
 const recipeSchema = new mongoose.Schema({
@@ -13,17 +12,34 @@ const recipeSchema = new mongoose.Schema({
 	serves: Number,
 	cost: Number,
 	cuisineType: {type: String,  enum: cuisines},
-	instructions: [{type: String}],
-	user: [{
+	instructions: [String],
+	author: [{
 		type: mongoose.Schema.Types.ObjectId,
 		ref: `User`
 	}],
-
-	// ingredients: //sub ingrediants schema
+	ingredients: [Ingredient.schema]
 
 })
 
 module.exports = mongoose.model(`Recipe`, recipeSchema)
+
+
+
+
+
+
+// const rec = await create. {
+// 	name: "tuna melt",
+// 	// ...
+// 	// ...
+// }
+
+
+// rec.ingredients.push({
+// 	name: 
+// 	quantity: 
+// })
+// await rec.save()
 
 
 

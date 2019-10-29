@@ -9,11 +9,22 @@ require(`./db/db.js`)
 
 
 // middleware
+	//css
 app.use(express.static('public'))
+	//body parser
+app.use(bodyParser.urlencoded({extended: false}))
+
+	//session
+app.use(session({
+  secret: "Shh, This is a secret", 
+  resave: false, 
+  saveUninitialized: false 
+}));
+
+
 
 
 // controllers
-
 const userController = require(`./controllers/usersController.js`);
 app.use(`/users` , userController);
 const recipesController = require(`./controllers/recipesController.js`);
