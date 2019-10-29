@@ -1,6 +1,7 @@
 const express = require(`express`)
 const app = express()
-
+const bodyParser = require('body-parser');
+const session = require('express-session');
 
 // Database
 require(`./db/db.js`)
@@ -15,6 +16,9 @@ app.use(express.static('public'))
 
 const userController = require(`./controllers/usersController.js`);
 app.use(`/users` , userController);
+const recipesController = require(`./controllers/recipesController.js`);
+app.use(`/recipes` , recipesController);
+
 
 
 
