@@ -15,7 +15,7 @@ router.get(`/cuisine`, (req, res, next) => {
 		next(err)
 	}
 })
-
+// This Renders Added Recipe Route
 router.get(`/recipesList`, (req, res) => {
 	res.render(`recipes/recipesList.ejs`)
 })
@@ -37,13 +37,14 @@ router.get('/new', (req, res) => {
 router.post('/', async (req, res, next) => {
 	if (req.session.logged === true){
 		try {
-				const createdRecipe = await Recipe.create(req.body)
+				// const createdRecipe = await Recipe.create(req.body)
+				res.send(`this create route is working`) // use recipe edit above intead
 		}
 		catch(err) {
 			next(err)
 		
-			}
-		res.redirect(`/users/profile`) // use recipe edit above intead
+		}
+		
 	}
 })
 

@@ -1,6 +1,7 @@
 const express =  require(`express`)
 const router = express.Router()
 const User = require(`../models/user`)
+const Recipe = require(`../models/recipe`)
 const bcrypt = require(`bcryptjs`)
 
 
@@ -70,12 +71,21 @@ router.post(`/register`, async (req, res, next) => {
 
 
 // Profile route
+// Displays all recipes add by the logged in user
+
 // this will navigate to the profile page when the
 // view profile  link on the nav bar is clicked
-router.get('/profile', (req, res) => {
-	res.render('users/profile.ejs')
+router.get('/profile', async (req, res, next) => {
+	try {
+		const allRecipes =  await Recipe.find()
+		res.render('users/profile.ejs', {
+			allRecipes: allRecipes
+	})
+	}
+	catch(err) {
+		next(err)
+	}
 })
-
 
 
 
