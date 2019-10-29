@@ -15,9 +15,37 @@ router.get(`/cuisine`, (req, res, next) => {
 		next(err)
 	}
 })
-
+// This Renders Added Recipe Route
 router.get(`/recipesList`, (req, res) => {
 	res.render(`recipes/recipesList.ejs`)
+})
+
+// Add/Edit Route
+// this will be the edit page route and will only be accesible
+// thru the user's profile page
+router.get('/new', (req, res) => {
+	res.render('recipes/new.ejs', {
+		cuisineTypes: Recipe.schema.path('cuisineType').enumValues
+		// cuisine types
+	})
+	
+})
+
+// recipe edit (where you add ingredients)
+
+// create recipe
+router.post('/', async (req, res, next) => {
+	if (req.session.logged === true){
+		try {
+				// const createdRecipe = await Recipe.create(req.body)
+				res.send(`this create route is working`) // use recipe edit above intead
+		}
+		catch(err) {
+			next(err)
+		
+		}
+		
+	}
 })
 
 

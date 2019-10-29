@@ -8,14 +8,16 @@
 	<body>
 	<h1>The Roasted Mongoose</h1>
 	<nav>
-			<a href="/">Home</a>
-			<a href="../recipes/cuisine">Cuisines</a>
-			<a href="#">View Profile</a>
-			<a href="../users/login">login</a>
-			<a href="#">logout</a>
-		</nav>
+		<a href="/">Home</a>
+		<a href="/recipes/cuisine">Cuisines</a>
+		<a href="/users/profile">View Profile</a>
+		<a href="/users/login">login</a>
+	</nav>
+    
 
-		<%= message %>
+
+
+		
 
 	<h4>Login</h4>
 	  <form action="/users/login" method="POST">
@@ -26,6 +28,7 @@
 	  </form><br/>
 
 	  <h5>Don't have an account? <a href="./register">Create one now!</a></h5>
+
 	 
 	</body>
 </html>			

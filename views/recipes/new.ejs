@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Add Recipe</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>This Is The Add Recipe Page</h1>
+	<nav>
+		<a href="/">Home</a>
+		<a href="/recipes/cuisine">Cuisines</a>
+		<a href="/users/profile">View Profile</a>
+	</nav>
+	<main>
+		<section>
+			
+			<form action="" method="POST">
+
+				<h3>Recipe Name:</h3>
+				<input type="text" name="name" placeholder="enter recipe here"><br/>
+
+				<h3>Recipe Image:</h3>
+				<input type="text" name="img" placeholder="img here"><br/>
+
+				<h3>Serves:</h3>
+				<input type="Number" name="serves" placeholder="serves amount"><br/>
+
+				<h3>Cost:</h3>
+				<input type="Number" name="cost" placeholder="enter cost"><br/>
+
+				<h3>Cuisine</h3>
+				<select name="cuisineTypes">
+		              <% for(let i = 0; i < cuisineTypes.length; i++) { %>
+		                  <option value="<%=cuisineTypes[i]._id%>"><%=cuisineTypes[i]%></option>
+		              <% } %>
+				</select><br/>
+
+				<h3>Instructions:</h3>
+				<textarea name="instructions" placeholder="instructions"></textarea><br/>
+
+
+				<button value="submit">Add ingredients</button>
+			</form>
+
+		</section>
+	</main>
+</body>
+</html>
+
+
+<!-- name: String,
+	recipeImg: String,
+	serves: Number,
+	cost: Number,
+	cuisineType: {type: String,  enum: cuisines},
+	instructions: [String],
+	author: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: `User`
+	}],
+	ingredients: [Ingredient.schema]
+}) -->
+
+
+<!-- name: String,
+	recipeImg: String,
+	serves: Number,
+	cost: Number,
+	cuisineType: {type: String,  enum: cuisines},
+	instructions: [String],
+	author: [{
+		type: mongoose.Schema.Types.ObjectId,
+		ref: `User`
+	}],
+	ingredients: [Ingredient.schema]
+}) -->
+
