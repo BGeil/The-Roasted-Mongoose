@@ -77,4 +77,3 @@ module.exports = mongoose.model(`Recipe`, recipeSchema)
 // 		type: mongooose.Schema.Types.ObjectId
 // 		ref: 'recipe'
 // 	}
->>>>>>> 1c820771e8b72683d98479dd933214e15d592278
