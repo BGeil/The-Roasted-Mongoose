@@ -11,7 +11,7 @@ router.get(`/login`, (req, res) => {
 
 // this checks to see if there an existing username and password
 // if true, the user is logged in
-// if false they ger redirected back to the login page
+// if false they ger redirected back to the login pa
 router.post(`/login`, async (req, res, next) => {
 	try {
 		const foundUser = await User.findOne({username: req.body.username});
@@ -20,16 +20,20 @@ router.post(`/login`, async (req, res, next) => {
 				req.session.message = '';
 				req.session.username = foundUser.username;
 				req.session.logged = true;
+				console.log('password correct');
 				res.redirect(`/users/profile`)
+
 			}
 			else{
+				console.log(`Username or password is incorrect`);
 				req.session.message = `Username or password is incorrect`;
-				res.redirect(`users/login`)
+				res.redirect(`/users/login`)
 			}
 		}
 		else {
+			console.log(`Username or password is incorrect`);
 			req.session.message = `Username or password is incorrect`
-			res.redirect(`users/login`)
+			res.redirect(`/users/login`)
 		}
 	}
 	catch(err) {
