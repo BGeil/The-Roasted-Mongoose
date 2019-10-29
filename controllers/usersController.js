@@ -22,15 +22,52 @@ router.get(`/register`, (req, res) => {
 	res.render(`users/register.ejs`)
 })
 
-
 router.post(`/register`, async (req, res, next) => {
 	const password = req.body.password
 	const encryptedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+
+	const newUserEntry = {};
+	newUserEntry.username = req.body.username;
+	newUserEntry.password = encryptedPassword;
+	try {
+		const createdUser = await User.create(newUserEntry);
+		console.log(createdUser);
+	}
+	catch(err) {
+		next(err)
+	}
+	req.session.username = createdUser.username
+	req.session.logged = true;
+	res.redirect(`/login`)
 })
 
 
 
 
+// router.post(`/registration`, async (req, res, next) => {
+  
+
+//   // first thing to do is hash the password
+//   const password = req.body.password //password fomr the body
+//   const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
+
+//   const userDbEntry = {};
+//   userDbEntry.username = req.body.username;
+//   userDbEntry.password = passwordHash;
+//   userDbEntry.email =  req.body.email;
+//   try {
+//     // added the user to the db
+//     const createdUser = await User.create(userDbEntry);
+//     console.log(createdUser);
+//   }
+//   catch(err) {
+//     next(err)
+//   }
+//   req.session.username = createdUser.username
+//   req.session.logged = true;
+
+//   res.redirect(`/authors`)
+// })
 
 
 
