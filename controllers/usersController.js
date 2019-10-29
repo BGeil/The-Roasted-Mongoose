@@ -76,12 +76,7 @@ router.get('/profile', (req, res) => {
 	res.render('users/profile.ejs')
 })
 
-// Add/Edit Route
-// this will be the edit page route and will only be accesible
-// thru the user's profile page
-router.get('/edit', (req, res) => {
-	res.render('users/edit.ejs')
-})
+
 
 
 module.exports = router;

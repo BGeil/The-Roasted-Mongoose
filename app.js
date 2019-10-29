@@ -1,6 +1,7 @@
 const express = require(`express`)
 const app = express()
 const bodyParser = require('body-parser');
+const methodOverride = require('method-override');
 const session = require('express-session');
 
 // Database
@@ -9,11 +10,12 @@ require(`./db/db.js`)
 
 
 // middleware
-	//css
+	// css
 app.use(express.static('public'))
 	//body parser
 app.use(bodyParser.urlencoded({extended: false}))
-
+// method override
+app.use(methodOverride('_method'));
 	//session
 app.use(session({
   secret: "Shh, This is a secret", 
