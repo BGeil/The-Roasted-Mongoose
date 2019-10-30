@@ -30,11 +30,6 @@ router.get('/new', (req, res) => {
 	})
 	
 })
-// index ingredients
-// router.get(`/ingredientsShow`, async(req, res) => {
-	
-// 	res.render(`recipes/ingredientsShow.ejs`)
-// })
 
 // create recipe
 router.post('/ingredientsShow', async (req, res, next) => {
@@ -42,18 +37,12 @@ router.post('/ingredientsShow', async (req, res, next) => {
 			const createdRecipe = await Recipe.create(req.body)
 			createdRecipe.name = req.body.name
 
-			console.log('-----------');
-			console.log(`created recipe in post route before saving`);
-			console.log(createdRecipe);
-			console.log('-------------');
+			
 
 
 		 	const savedRecipe = await createdRecipe.save();
 		 	req.session.savedRecipe = savedRecipe;
 
-		 	console.log('this is the saved recipe after creating in the post route');
-		 	console.log(savedRecipe);
-	
 
 			res.render(`recipes/ingredientsShow.ejs`, {
 				savedRecipe: savedRecipe
@@ -63,7 +52,37 @@ router.post('/ingredientsShow', async (req, res, next) => {
 		next(err)
 	}
 })
-// recipe edit (where you add ingredients)
+
+
+//  add ingredients route
+
+router.post(`/ingredientsShow`, async (req, res, next) => {
+	try {
+		const ingredients = await Ingredient.create(req.body)
+
+		console.log(`this is the the req.body.savedRecipe on a post route`);
+
+		console.log(req.body.savedRecipe);
+
+		const recipes = Recipe.findOne(req.body.savedRecipe)
+
+		recipes.ingredients.push(ingredients)
+
+		const savedIngredients = await ingredients.save()
+
+		res.redirect(`recipes/ingredientsShow`)
+
+	// req.ingredients.push({
+// 	name: 
+// 	quantity: 
+// })
+// await rec.save()
+	
+	}
+	catch(err) {
+		next(err)
+	}
+})
 
 
 module.exports = router;

@@ -21,7 +21,8 @@
 				<!-- ejs goes here -->
 				<h3>Recipe Name:</h3>
 				<li><%= savedRecipe.name %></li>
-				
+				<h3>Ingredients:</h3>
+				<li><%=savedRecipe.ingredients%></li>
 			</ul>
 		</section>
 		
@@ -33,11 +34,11 @@
 		<!--  This section will push ingredients into recipe -->
 		<section>
 			
-			<form action="" method="POST">
+			<form action="/recipes/ingredientsShow" method="POST">
 				<!-- pushing name of ingred and quanttity -->
-
-
-				<button value="submit">Add</button>
+ 				<input type="text" name="name" placeholder="name">
+ 				<input type="text" name="quantity" placeholder="quantity">
+				<button>Add Ingredient</button>
 			</form>
 
 		</section>
