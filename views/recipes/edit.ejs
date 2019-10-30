@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Add Recipe</title>
+	<title>Add Ingredients Page</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<h1>Recipe Page</h1>
+	<h1>This Is The Add Ingredients Page</h1>
 	<nav>
 		<a href="/">Home</a>
 		<a href="/recipes/cuisine">Cuisines</a>
@@ -15,11 +15,10 @@
 	</nav>
 	<main>
 
-		<!-- Need to Display Recipe information here: -->
+		
 
 		<section>
 			<ul>
-				
 				<h3>Recipe Name:</h3>
 				<li><%= savedRecipe.name %></li> 
                 <h3>Image:</h3>
@@ -33,11 +32,22 @@
                 <h3>Instructions:</h3>
                 <li><%= savedRecipe.instructions %></li> 
 
+                 <h3>Ingredients:</h3>
+                <li><%= savedRecipe.ingredients %></li> 
+
 			</ul>
 		</section>
-		
+
+		<!--  This section will push ingredients into recipe -->
 		<section>
-			 <h5> Go <a href="/recipes/<%= savedRecipe._id %>/edit">here</a> to add ingredients to your recipe!</h5>
+			
+			<form action="/recipes/<%= savedRecipe._id %>?_method=PUT" method="POST">
+				<!-- pushing name of ingred and quanttity -->
+ 				<input type="text" name="name" placeholder="name">
+ 				<input type="text" name="quantity" placeholder="quantity">
+				<button>Add Ingredient</button>
+			</form>
+
 		</section>
 	</main>
 </body>

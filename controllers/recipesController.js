@@ -41,8 +41,7 @@ router.get('/:id', async (req, res, next) => {
 		console.log(`this is the found recipe in :id route`);
 		console.log(foundRecipe);
 		res.render(`recipes/show.ejs`, {
-			savedRecipe: foundRecipe,
-
+			savedRecipe: foundRecipe
 		})		
 	}
 	catch (err) {
@@ -66,49 +65,47 @@ router.post('/show', async (req, res, next) => {
 })
 
 
-
-
-
-
-
-
-
-
-
-
+router.get('/:id/edit', async (req, res, next) => {
+    try {
+        // similar func to recipe show --
+        // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
+        console.log('this is for the edit recipe page');
+        const foundRecipe = await Recipe.findById(req.params.id)
+        console.log(`this is the fouund recipe in eidt route`);
+        console.log(foundRecipe);
+        // that form will post to the following route:
+        res.render('recipes/edit.ejs', {
+        	savedRecipe: foundRecipe
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+})
 
 
 //  add ingredients route
 
-router.post(`/show`, async (req, res, next) => {
+router.put(`/:id`, async (req, res, next) => {
+	console.log(req.body);
 	try {
-		const ingredients = await Ingredient.create(req.body)
 
-		console.log(`this is the the req.body.savedRecipe on a post route`);
+		const recipe = await Recipe.findById(req.params.id)
 
-		console.log(req.body.savedRecipe);
+		recipe.ingredients.push({
+			name: req.body.name,
+			quantity: req.body.quantity
+		})
 
-		const recipes = Recipe.findOne(req.body.savedRecipe)
+		await recipe.save()
 
-		recipes.ingredients.push(ingredients)
-
-		const savedIngredients = await ingredients.save()
-
-		res.redirect(`recipes/show`)
+		res.redirect(`/recipes/` + recipe._id  + `/edit`)
 
 	}
 	catch(err) {
 		next(err)
 	}
 })
-
-
-// 1.
-// recipe edit (where you add ingredients) GET /recipes/edit/:id
-// similar func to recipe show --
-// also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
-// that form will post to the following route:
-
 
 // 2.
 // PUT /recipes/:id
@@ -130,6 +127,9 @@ router.post(`/show`, async (req, res, next) => {
 /// later: don't let people edit recipes unless they're the ones that created them
 // 4a. make the recipe page not work (redirect and show message "you can't") if it's not their recipe
 // 4b. only show edit link on show page if it's their recipe
+
+
+
 
 
 
