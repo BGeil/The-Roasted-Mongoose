@@ -43,7 +43,7 @@ router.get('/:id', async (req, res, next) => {
 	console.log("\nwe just hit recipe show route, here's req.params.id", req.params.id);
 	try {
 		const foundRecipe = await Recipe.findById(req.params.id)
-		res.render(`recipes/ingredientsShow.ejs`, {
+		res.render(`recipes/show.ejs`, {
 			savedRecipe: foundRecipe
 		})		
 	}
@@ -56,7 +56,7 @@ router.get('/:id', async (req, res, next) => {
 
 
 // create recipe
-router.post('/ingredientsShow', async (req, res, next) => {
+router.post('/show', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
 		
@@ -84,16 +84,31 @@ router.post('/ingredientsShow', async (req, res, next) => {
 
 // 1.
 // recipe edit (where you add ingredients) GET /recipes/edit/:id
-router.get('/recipes/edit/:id', async (req, res, next) => {
-	
+router.get('/recipes/:id/edit', async (req, res, next) => {
+	try {
+		// similar func to recipe show --
+		// also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
+		console.log('this is for the edit recipe page');
+		const foundRecipe = await Recipe.findById(req.param.id)
+		// that form will post to the following route:
+		res.render('recipes/edit.ejs')
+	}
+	catch (err) {
+		next(err)
+	}
 })
-// similar func to recipe show --
-// also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
-// that form will post to the following route:
 
 
 // 2. PUT /recipes/:id
-router.put('/recipes/:id')
+router.put('/recipes/:id', async (req, res, next) => {
+	try {
+		console.log('');
+		
+	}
+	catch (err) {
+		next(err)
+	}
+})
 // get the recipe from db
 // adds that ingredient (req.body) to that recipe (push)
 // --> .save()
