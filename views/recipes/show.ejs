@@ -22,6 +22,8 @@
 				
 				<h3>Recipe Name:</h3>
 				<li><%= savedRecipe.name %></li> 
+				<h3>Author goes here:</h3>
+				<!-- author code -->
                 <h3>Image:</h3>
                 <img src="<%= savedRecipe.recipeImg %>"> 
                 <h3>Serves:</h3>
@@ -32,8 +34,16 @@
                 <li><%= savedRecipe.cuisineType %></li> 
                 <h3>Instructions:</h3>
                 <li><%= savedRecipe.instructions %></li> 
+                 <h3>Ingredients:</h3>
+                 <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
+                 	 <li><%= savedRecipe.ingredients[i].quantity %> of <%= savedRecipe.ingredients[i].name %></li> 
+
+                 <% } -%>
+               
 
 			</ul>
+			<h5> Edit Recipe <a href="/recipes/<%= savedRecipe._id %>/editRecipe">here</a></h5>
+			
 		</section>
 		
 		<section>

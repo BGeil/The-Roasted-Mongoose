@@ -64,7 +64,7 @@ router.post('/show', async (req, res, next) => {
 	}
 })
 
-// this apge add ingredients to the recipe
+// this shows the page that can add ingreients to the recipe
 router.get('/:id/edit', async (req, res, next) => {
     try {
         // similar func to recipe show --
@@ -84,8 +84,8 @@ router.get('/:id/edit', async (req, res, next) => {
 })
 
 
-//  add ingredients route
-
+//  this page adds ingredients to the recipe
+//update route
 router.put(`/:id`, async (req, res, next) => {
 	console.log(req.body);
 	try {
@@ -107,16 +107,27 @@ router.put(`/:id`, async (req, res, next) => {
 	}
 })
 
-// 2.
-// PUT /recipes/:id
-// get the recipe from db
-// adds that ingredient (req.body) to that recipe (push)
-// --> .save()
-// and redirects back to the recipe edit page 
 
+// this ir the  ENTIRE RECIPE EDIT ROUTE
+router.get('/:id/editRecipe', async (req, res, next) => {
+    try {
+        // similar func to recipe show --
+        // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
+        console.log('this is for the edit recipe page.');
+        const foundRecipe = await Recipe.findById(req.params.id)
+        console.log(`this is the fouund recipe in edit route`);
+        console.log(foundRecipe);
+        // that form will post to the following route:
+        res.render('recipes/editRecipe.ejs', {
+        	savedRecipe: foundRecipe,
+        	cuisineTypes: Recipe.schema.path('cuisineType').enumValues
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+})
 
-// (pro tip)
-// (link on recipe edit page to say done --> link to show )
 
 
 // 3.
