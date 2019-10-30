@@ -14,9 +14,6 @@
 		<a href="/">logout</a>
 	</nav>
 	<main>
-
-		
-
 		<section>
 			<ul>
 				<h3>Recipe Name:</h3>
@@ -33,21 +30,23 @@
                 <li><%= savedRecipe.instructions %></li> 
 
                  <h3>Ingredients:</h3>
-                <li><%= savedRecipe.ingredients %></li> 
+                 <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
+                 	 <li><%= savedRecipe.ingredients[i].quantity %> of <%= savedRecipe.ingredients[i].name %></li> 
 
+                 <% } -%>
+               
 			</ul>
 		</section>
 
 		<!--  This section will push ingredients into recipe -->
 		<section>
-			
 			<form action="/recipes/<%= savedRecipe._id %>?_method=PUT" method="POST">
 				<!-- pushing name of ingred and quanttity -->
  				<input type="text" name="name" placeholder="name">
  				<input type="text" name="quantity" placeholder="quantity">
 				<button>Add Ingredient</button>
 			</form>
-
+			<h5> Done adding Igredients? Go back to<a href="/recipes/show"> Recipes</a></h5>
 		</section>
 	</main>
 </body>
