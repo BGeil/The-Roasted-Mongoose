@@ -52,7 +52,7 @@ router.get('/:id', async (req, res, next) => {
 
 
 
-// creates recipe on new.ejs and redirects to show page
+// creates recipe on new.ejs and redirects to SHOW page
 router.post('/show', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
@@ -64,12 +64,12 @@ router.post('/show', async (req, res, next) => {
 	}
 })
 
-
+// this apge add ingredients to the recipe
 router.get('/:id/edit', async (req, res, next) => {
     try {
         // similar func to recipe show --
         // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
-        console.log('this is for the edit recipe page');
+        console.log('this is for the edit recipe page.');
         const foundRecipe = await Recipe.findById(req.params.id)
         console.log(`this is the fouund recipe in eidt route`);
         console.log(foundRecipe);
