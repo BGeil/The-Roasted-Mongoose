@@ -31,22 +31,31 @@ router.get('/new', (req, res) => {
 	
 })
 
-// create recipe
-router.post('/ingredientsShow', async (req, res, next) => {
+
+// recipe show -- takes ID as a URL parameter, find the recipe w/ that id in DB,
+// and renders a template with that data from that recipe inserted 
+router.get('/:id', async (req, res, next) => {
+	console.log("\nwe just hit recipe show route, here's req.params.id", req.params.id);
+	try {
+		const foundRecipe = await Recipe.findById(req.params.id)
+		res.render(`recipes/show.ejs`, {
+			savedRecipe: foundRecipe
+		})		
+	}
+	catch (err) {
+		next(err)
+	}
+})
+
+
+
+
+// creates recipe on new.ejs and redirects to show page
+router.post('/show', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
-			createdRecipe.name = req.body.name
-
-			
-
-
 		 	const savedRecipe = await createdRecipe.save();
-		 	req.session.savedRecipe = savedRecipe;
-
-
-			res.render(`recipes/ingredientsShow.ejs`, {
-				savedRecipe: savedRecipe
-			})
+		 	res.redirect('/recipes/' + savedRecipe._id)
 		}
 	catch(err) {
 		next(err)
@@ -54,9 +63,10 @@ router.post('/ingredientsShow', async (req, res, next) => {
 })
 
 
+
 //  add ingredients route
 
-router.post(`/ingredientsShow`, async (req, res, next) => {
+router.post(`/show`, async (req, res, next) => {
 	try {
 		const ingredients = await Ingredient.create(req.body)
 
@@ -70,19 +80,42 @@ router.post(`/ingredientsShow`, async (req, res, next) => {
 
 		const savedIngredients = await ingredients.save()
 
-		res.redirect(`recipes/ingredientsShow`)
+		res.redirect(`recipes/show`)
 
-	// req.ingredients.push({
-// 	name: 
-// 	quantity: 
-// })
-// await rec.save()
-	
 	}
 	catch(err) {
 		next(err)
 	}
 })
+
+// 1.
+// recipe edit (where you add ingredients) GET /recipes/edit/:id
+// similar func to recipe show --
+// also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
+// that form will post to the following route:
+
+
+// 2.
+// PUT /recipes/:id
+// get the recipe from db
+// adds that ingredient (req.body) to that recipe (push)
+// --> .save()
+// and redirects back to the recipe edit page 
+
+
+// (pro tip)
+// (link on recipe edit page to say done --> link to show )
+
+
+// 3.
+// make the recipe edit page able to edit the other data as well
+
+
+// 4. 
+/// later: don't let people edit recipes unless they're the ones that created them
+// 4a. make the recipe page not work (redirect and show message "you can't") if it's not their recipe
+// 4b. only show edit link on show page if it's their recipe
+
 
 
 module.exports = router;
