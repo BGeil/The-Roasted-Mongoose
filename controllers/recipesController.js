@@ -30,18 +30,26 @@ router.get('/new', (req, res) => {
 	})
 	
 })
+// index ingredients
+router.get(`/ingredientsShow`, async(req, res) => {
+	
+	res.render(`recipes/ingredientsShow.ejs`, {
+
+	})
+})
 
 // create recipe
-router.post('/', async (req, res, next) => {
-		try {
-				const createdRecipe = await Recipe.create(req.body)
-				res.render(`recipes/ingredientsShow.ejs`, {
-					createdRecipe: createdRecipe
-				})
-			}
-		catch(err) {
-			next(err)
+router.post('/ingredientsShow', async (req, res, next) => {
+	try {
+			const createdRecipe = await Recipe.create(req.body)
+			console.log(`created recipe in post route`);
+			console.log(createdRecipe);
+		 	req.sessions.currentRecipe = createdRecipe;
+			res.redirect(`/recipes/ingredientsShow`)
 		}
+	catch(err) {
+		next(err)
+	}
 })
 // recipe edit (where you add ingredients)
 
