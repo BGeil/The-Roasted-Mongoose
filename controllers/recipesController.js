@@ -80,7 +80,27 @@ router.post('/ingredientsShow', async (req, res, next) => {
 		next(err)
 	}
 })
-// recipe edit (where you add ingredients)
+
+
+
+// recipe edit (where you add ingredients) GET /recipes/edit/:id
+// similar func to recipe show --
+// also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
+// that form will post to the following route:
+
+
+
+// PUT /recipes/:id
+// get the recipe from db
+// adds that ingredient (req.body) to that recipe (push)
+// --> .save()
+// and redirects back to the recipe edit page 
+
+
+// (pro tip)
+// (link on recipe edit page to say done --> link to show )
+
+/// later: don't let people edit recipes unless they're the ones that created them
 
 
 module.exports = router;
