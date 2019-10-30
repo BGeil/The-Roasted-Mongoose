@@ -84,13 +84,16 @@ router.post('/ingredientsShow', async (req, res, next) => {
 
 // 1.
 // recipe edit (where you add ingredients) GET /recipes/edit/:id
+router.get('/recipes/edit/:id', async (req, res, next) => {
+	
+})
 // similar func to recipe show --
 // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
 // that form will post to the following route:
 
 
-// 2.
-// PUT /recipes/:id
+// 2. PUT /recipes/:id
+router.put('/recipes/:id')
 // get the recipe from db
 // adds that ingredient (req.body) to that recipe (push)
 // --> .save()
