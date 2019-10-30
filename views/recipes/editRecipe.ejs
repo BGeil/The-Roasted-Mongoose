@@ -44,6 +44,16 @@
 				<textarea name="instructions" value="<%=savedRecipe.instructions%>"></textarea><br/>
 
 
+                 <h3>Ingredients:</h3>
+                 <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
+                 	<input type="text" name="ingredients" value="<%= savedRecipe.ingredients[i].quantity %>"><br/> 
+                 	<li>of</li>
+                 	<input type="text" name="ingredients" value="<%= savedRecipe.ingredients[i].name %>"><br/><br/> 
+                 	 
+
+                 <% } -%>
+
+
 
 
 				<button>UpdateRecipe</button>
