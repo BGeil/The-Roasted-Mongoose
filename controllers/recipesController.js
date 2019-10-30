@@ -31,21 +31,33 @@ router.get('/new', (req, res) => {
 	
 })
 // index ingredients
-router.get(`/ingredientsShow`, async(req, res) => {
+// router.get(`/ingredientsShow`, async(req, res) => {
 	
-	res.render(`recipes/ingredientsShow.ejs`, {
-
-	})
-})
+// 	res.render(`recipes/ingredientsShow.ejs`)
+// })
 
 // create recipe
 router.post('/ingredientsShow', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
-			console.log(`created recipe in post route`);
+			createdRecipe.name = req.body.name
+
+			console.log('-----------');
+			console.log(`created recipe in post route before saving`);
 			console.log(createdRecipe);
-		 	req.sessions.currentRecipe = createdRecipe;
-			res.redirect(`/recipes/ingredientsShow`)
+			console.log('-------------');
+
+
+		 	const savedRecipe = await createdRecipe.save();
+		 	req.session.savedRecipe = savedRecipe;
+
+		 	console.log('this is the saved recipe after creating in the post route');
+		 	console.log(savedRecipe);
+	
+
+			res.render(`recipes/ingredientsShow.ejs`, {
+				savedRecipe: savedRecipe
+			})
 		}
 	catch(err) {
 		next(err)
