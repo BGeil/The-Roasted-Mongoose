@@ -38,8 +38,11 @@ router.get('/:id', async (req, res, next) => {
 	console.log("\nwe just hit recipe show route, here's req.params.id", req.params.id);
 	try {
 		const foundRecipe = await Recipe.findById(req.params.id)
+		console.log(`this is the found recipe in :id route`);
+		console.log(foundRecipe);
 		res.render(`recipes/show.ejs`, {
-			savedRecipe: foundRecipe
+			savedRecipe: foundRecipe,
+
 		})		
 	}
 	catch (err) {
@@ -56,11 +59,22 @@ router.post('/show', async (req, res, next) => {
 			const createdRecipe = await Recipe.create(req.body)
 		 	const savedRecipe = await createdRecipe.save();
 		 	res.redirect('/recipes/' + savedRecipe._id)
-		}
+	}
 	catch(err) {
 		next(err)
 	}
 })
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -87,6 +101,7 @@ router.post(`/show`, async (req, res, next) => {
 		next(err)
 	}
 })
+
 
 // 1.
 // recipe edit (where you add ingredients) GET /recipes/edit/:id

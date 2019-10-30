@@ -10,7 +10,8 @@
 	<nav>
 		<a href="/">Home</a>
 		<a href="/recipes/cuisine">Cuisines</a>
-		<a href="/users/profile">View Profile</a>
+		<a href="/recipes/new">Add Recipe </a>
+		<a href="/">logout</a>
 	</nav>
 	<main>
 		<section>
@@ -32,9 +33,9 @@
 				<input type="number" name="cost" placeholder="enter cost"><br/>
 
 				<h3>Cuisine</h3>
-				<select name="cuisineTypes">
+				<select name="cuisineType">
 		              <% for(let i = 0; i < cuisineTypes.length; i++) { %>
-		                  <option value="<%=cuisineTypes[i]._id%>"><%=cuisineTypes[i]%></option>
+		                  <option value="<%=cuisineTypes[i]%>"><%=cuisineTypes[i]%></option>
 		              <% } %>
 				</select><br/>
 
