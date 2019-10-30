@@ -18,11 +18,19 @@
 
 		<section>
 			<ul>
-				
 				<!-- ejs goes here -->
 				<h3>Recipe Name:</h3>
-				<li><%= savedRecipe.name %></li>
-				
+				<li><%= savedRecipe.name %></li> 
+                <h3>Image:</h3>
+                <img src="<%= savedRecipe.recipeImg %>"> 
+                <h3>Serves:</h3>
+                <li><%= savedRecipe.serves %></li> 
+                <h3>Cost:</h3>
+                <li><%= savedRecipe.cost %></li> 
+                <h3>Cuisine Type:</h3>
+                <li><%= savedRecipe.cuisineType %></li> 
+                <h3>Instructions:</h3>
+                <li><%= savedRecipe.instructions %></li> 
 			</ul>
 		</section>
 

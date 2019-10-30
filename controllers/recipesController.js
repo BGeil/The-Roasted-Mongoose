@@ -36,12 +36,30 @@ router.get('/new', (req, res) => {
 // 	res.render(`recipes/ingredientsShow.ejs`)
 // })
 
+
+// recipe show -- takes ID as a URL parameter, find the recipe w/ that id in DB,
+// and renders a template with that data from that recipe inserted 
+router.get('/:id', async (req, res, next) => {
+	console.log("\nwe just hit recipe show route, here's req.params.id", req.params.id);
+	try {
+		const foundRecipe = await Recipe.findById(req.params.id)
+		res.render(`recipes/ingredientsShow.ejs`, {
+			savedRecipe: foundRecipe
+		})		
+	}
+	catch (err) {
+		next(err)
+	}
+})
+
+
+
+
 // create recipe
 router.post('/ingredientsShow', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
-			createdRecipe.name = req.body.name
-
+		
 			console.log('-----------');
 			console.log(`created recipe in post route before saving`);
 			console.log(createdRecipe);
@@ -49,15 +67,14 @@ router.post('/ingredientsShow', async (req, res, next) => {
 
 
 		 	const savedRecipe = await createdRecipe.save();
-		 	req.session.savedRecipe = savedRecipe;
+		 	// req.session.savedRecipe = savedRecipe;
 
 		 	console.log('this is the saved recipe after creating in the post route');
 		 	console.log(savedRecipe);
 	
+		 	// redirect to /recipes/:id -- show page
+		 	res.redirect('/recipes/' + savedRecipe._id)
 
-			res.render(`recipes/ingredientsShow.ejs`, {
-				savedRecipe: savedRecipe
-			})
 		}
 	catch(err) {
 		next(err)
