@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<<<<<<< HEAD
     <title>Add Recipe</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
     <link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -43,5 +44,48 @@
 
         </section>
     </main>
+=======
+	<title>Add Recipe</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
+	<link rel="stylesheet" type="text/css" href="/css/style.css">
+</head>
+<body>
+	<h1>This Is The Add Ingredients Page</h1>
+	<nav>
+		<a href="/">Home</a>
+		<a href="/recipes/cuisine">Cuisines</a>
+		<a href="/users/profile">View Profile</a>
+	</nav>
+	<main>
+
+		<!-- Need to Display Recipe information here: -->
+		<section>
+			<ul>
+				<h5>Recipe Name:</h5>
+				<li><%= createdRecipe.name %></li>
+				<h5>Recipe Image:</h5>
+				<img src="<%=createdRecipe.recipeImg%>">
+			</ul>
+
+		</section>
+		
+
+
+
+
+
+		<!--  This section will push ingredients into recipe -->
+		<section>
+			
+			<form action="" method="POST">
+				<!-- pushing name of ingred and quanttity -->
+
+
+				<button value="submit">Add </button>
+			</form>
+
+		</section>
+	</main>
+>>>>>>> c93c47863939a9ff57754ec790c76db01ff28755
 </body>
 </html>

@@ -31,22 +31,19 @@ router.get('/new', (req, res) => {
 	
 })
 
-// recipe edit (where you add ingredients)
-
 // create recipe
 router.post('/', async (req, res, next) => {
-	if (req.session.logged === true){
 		try {
-				// const createdRecipe = await Recipe.create(req.body)
-				res.send(`this create route is working`) // use recipe edit above intead
-		}
+				const createdRecipe = await Recipe.create(req.body)
+				res.render(`recipes/ingredientsShow.ejs`, {
+					createdRecipe: createdRecipe
+				})
+			}
 		catch(err) {
 			next(err)
-		
 		}
-		
-	}
 })
+// recipe edit (where you add ingredients)
 
 
 module.exports = router;
