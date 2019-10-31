@@ -28,7 +28,7 @@ router.get(`/cuisine/:cuisineType`, async (req, res, next) => {
 		console.log(`\nthis is the foundRecipes in cuisine POST Route:`);
 		console.log(foundRecipes);
 		// render
-		res.send('under construction -- check terminal -- will be a list of cuisines')
+		res.render('recipes/recipesList.ejs', { foundRecipes: foundRecipes })
 	}
 	catch(err) {
 		next(err)

@@ -20,7 +20,7 @@
 		<ul>
 		<% for (let i = 0; i < foundRecipes.length; i++) { -%>
 			<li>
-			<a href="/recipes/show">foundRecipes[i]</a>
+			<a href="/recipes/<%= foundRecipes[i]._id %>"><%=foundRecipes[i].name%></a>
 		</li>
 		<% } -%>
    		</ul>
