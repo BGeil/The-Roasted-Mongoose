@@ -16,7 +16,7 @@
 	<main>
 		<section>
 			
-			<form action="" method="POST">
+			<form action="/recipes/<%= savedRecipe._id %>?_method=PUT" method="POST">
 
 				<h3>Recipe Name:</h3>
 
@@ -46,9 +46,10 @@
 
                  <h3>Ingredients:</h3>
                  <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
+                 
                  	<input type="text" name="ingredients" value="<%= savedRecipe.ingredients[i].quantity %>"><br/> 
                  	<li>of</li>
-                 	<input type="text" name="ingredients" value="<%= savedRecipe.ingredients[i].name %>"><br/><br/> 
+                 	<input type="text" name="ingredients" value="<%= savedRecipe.ingredients[i].name %>"><br/> 
                  	 
 
                  <% } -%>

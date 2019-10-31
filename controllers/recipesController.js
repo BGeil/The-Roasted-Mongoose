@@ -35,11 +35,8 @@ router.get('/new', (req, res) => {
 // recipe show -- takes ID as a URL parameter, find the recipe w/ that id in DB,
 // and renders a template with that data from that recipe inserted 
 router.get('/:id', async (req, res, next) => {
-	console.log("\nwe just hit recipe show route, here's req.params.id", req.params.id);
 	try {
 		const foundRecipe = await Recipe.findById(req.params.id)
-		console.log(`this is the found recipe in :id route`);
-		console.log(foundRecipe);
 		res.render(`recipes/show.ejs`, {
 			savedRecipe: foundRecipe
 		})		
@@ -69,10 +66,7 @@ router.get('/:id/edit', async (req, res, next) => {
     try {
         // similar func to recipe show --
         // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
-        console.log('this is for the edit recipe page.');
         const foundRecipe = await Recipe.findById(req.params.id)
-        console.log(`this is the fouund recipe in eidt route`);
-        console.log(foundRecipe);
         // that form will post to the following route:
         res.render('recipes/edit.ejs', {
         	savedRecipe: foundRecipe
@@ -86,19 +80,15 @@ router.get('/:id/edit', async (req, res, next) => {
 
 //  this page adds ingredients to the recipe
 //update route
-router.put(`/:id`, async (req, res, next) => {
+router.put(`/:id/ingredients`, async (req, res, next) => {
 	console.log(req.body);
 	try {
-
 		const recipe = await Recipe.findById(req.params.id)
-
 		recipe.ingredients.push({
 			name: req.body.name,
 			quantity: req.body.quantity
 		})
-
 		await recipe.save()
-
 		res.redirect(`/recipes/` + recipe._id  + `/edit`)
 
 	}
@@ -108,16 +98,10 @@ router.put(`/:id`, async (req, res, next) => {
 })
 
 
-// this ir the  ENTIRE RECIPE EDIT ROUTE
+// this  the  ENTIRE RECIPE EDIT ROUTE
 router.get('/:id/editRecipe', async (req, res, next) => {
     try {
-        // similar func to recipe show --
-        // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
-        console.log('this is for the edit recipe page.');
         const foundRecipe = await Recipe.findById(req.params.id)
-        console.log(`this is the fouund recipe in edit route`);
-        console.log(foundRecipe);
-        // that form will post to the following route:
         res.render('recipes/editRecipe.ejs', {
         	savedRecipe: foundRecipe,
         	cuisineTypes: Recipe.schema.path('cuisineType').enumValues
@@ -127,6 +111,52 @@ router.get('/:id/editRecipe', async (req, res, next) => {
         next(err)
     }
 })
+// update route for Edit Recipe
+router.put(`/:id`, async (req, res, next) => {
+	try {
+		console.log("this is req.body from upadating the whole recipe")
+		console.log(req.body)
+		// const newIngredient = {
+		// 	name: req.body.ingredients[0]
+		// 	quantity: req.body.ingredients[1]
+		// }
+
+		// const updatedRecipe = {
+			
+		// }
+		const findUpdatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {new:true});
+		console.log(`this is the findUpdatedRecipe variable in the update route`);
+		console.log(findUpdatedRecipe);
+
+		await findUpdatedRecipe.save()
+
+		res.redirect(`/recipes/` + findUpdatedRecipe._id)
+
+	}
+	catch(err) {
+		next(err)
+	}
+})
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
