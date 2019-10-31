@@ -5,20 +5,29 @@ const User = require(`../models/user`)
 
 
 
-router.get(`/cuisine`, (req, res, next) => {
+router.get(`/cuisine/:type`, async (req, res, next) => {
 	try {
-		res.render(`recipes/cuisine.ejs`, {
-			cuisineTypes: Recipe.schema.path('cuisineType').enumValues
-		})
+
+		// const foundRecipes = await Recipe.find({})
+
+
+		// res.render('some template', {
+		// 		recipes
+		// })
 	}
 	catch(err) {
 		next(err)
 	}
 })
+
+
 // This Renders Added Recipe Route
 router.get(`/recipesList`, (req, res) => {
 	res.render(`recipes/recipesList.ejs`)
 })
+
+
+
 
 // Add/Edit Route
 // this will be the edit page route and will only be accesible
@@ -73,7 +82,8 @@ router.get('/:id/edit', async (req, res, next) => {
         const foundRecipe = await Recipe.findById(req.params.id)
         // that form will post to the following route:
         res.render('recipes/edit.ejs', {
-        	savedRecipe: foundRecipe
+        	savedRecipe: foundRecipe,
+        	cuisineTypes: Recipe.schema.path('cuisineType').enumValues
         })
     }
     catch (err) {
@@ -82,8 +92,8 @@ router.get('/:id/edit', async (req, res, next) => {
 })
 
 
-//  this page adds ingredients to the recipe
-//update route
+
+//ADD INGREDIENTS ROUTE
 router.put(`/:id/ingredients`, async (req, res, next) => {
 	console.log(req.body);
 	try {
@@ -93,7 +103,7 @@ router.put(`/:id/ingredients`, async (req, res, next) => {
 			quantity: req.body.quantity
 		})
 		await recipe.save()
-		res.redirect(`/recipes/` + recipe._id  + `/edit`)
+		res.redirect(`/recipes/` + recipe._id  + `/edit#ingredients`)
 
 	}
 	catch(err) {
@@ -101,8 +111,19 @@ router.put(`/:id/ingredients`, async (req, res, next) => {
 	}
 })
 
+// UPDATE ROUTE FOR RECIPE ONLY
+router.put(`/:id`, async (req, res, next) => {
+	try {
+		const findUpdatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {new:true});
+		await findUpdatedRecipe.save()
+		res.redirect(`/recipes/` + findUpdatedRecipe._id)
+	}
+	catch(err) {
+		next(err)
+	}
+})
 
-
+// DELETE ROUTE FOR RECIPES
 router.delete('/:id', async (req, res, next) => {
 	try {
 
@@ -116,8 +137,25 @@ router.delete('/:id', async (req, res, next) => {
 	}
 })
 
-// (pro tip)
-// (link on recipe edit page to say done --> link to show )
+// DELETE ROUTE FOR INGREDIENTS
+router.delete('/:recipeId/ingredients/:indexOfIngredientInArray', async (req, res, next) => {
+	console.log("\nhere is req.params");
+	console.log(req.params);
+	try {
+		
+		const recipe = await Recipe.findById(req.params.recipeId);
+		console.log("\n here's the reipce we found");
+		console.log(recipe);
+		// splice out ingredient
+		recipe.ingredients.splice(req.params.indexOfIngredientInArray,1)
+		await recipe.save()
+		res.redirect(`/recipes/` + recipe._id  + `/edit#ingredients`)
+		
+	}
+	catch (err) {
+		next(err)
+	}
+})
 
 // this  the  ENTIRE RECIPE EDIT ROUTE
 router.get('/:id/editRecipe', async (req, res, next) => {
@@ -132,28 +170,6 @@ router.get('/:id/editRecipe', async (req, res, next) => {
         next(err)
     }
 })
-// update route for Edit Recipe
-router.put(`/:id`, async (req, res, next) => {
-	try {
-		console.log("this is req.body from upadating the whole recipe")
-		console.log(req.body)
-
-		const findUpdatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {new:true});
-		console.log(`this is the findUpdatedRecipe variable in the update route`);
-		console.log(findUpdatedRecipe);
-
-		await findUpdatedRecipe.save()
-
-		res.redirect(`/recipes/` + findUpdatedRecipe._id)
-
-	}
-	catch(err) {
-		next(err)
-	}
-})
-
-// 3.
-// make the recipe edit page able to edit the other data as well
 
 
 // 4. 

@@ -13,39 +13,32 @@
 		<a href="/recipes/new">Add Recipe </a>
 		<a href="/">logout</a>
 	</nav>
+	<hr/>
 	<main>
-
-		<!-- Need to Display Recipe information here: -->
-
+		<h3> Add Ingredients or Edit Recipe <a href="/recipes/<%= savedRecipe._id %>/edit">here</a></h5>
 		<section>
 			<ul>
 				
-				<h3>Recipe Name:</h3>
+				<h4>Recipe Name:</h4>
 				<li><%= savedRecipe.name %></li> 
-				<h3>Author goes here:</h3>
-				<!-- author code -->
-                <h3>Image:</h3>
+				<h4>Author goes here:</h4>
+				
+                <h4>Image:</h4>
                 <img src="<%= savedRecipe.recipeImg %>"> 
-                <h3>Serves:</h3>
+                <h4>Serves:</h4>
                 <li><%= savedRecipe.serves %></li> 
-                <h3>Cost:</h3>
+                <h4>Cost:</h4>
                 <li><%= savedRecipe.cost %></li> 
-                <h3>Cuisine Type:</h3>
+                <h4>Cuisine Type:</h4>
                 <li><%= savedRecipe.cuisineType %></li> 
-                <h3>Instructions:</h3>
+                <h4>Instructions:</h4>
                 <li><%= savedRecipe.instructions %></li> 
-                 <h3>Ingredients:</h3>
+                 <h4>Ingredients:</h4>
                  <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
                  	 <li><%= savedRecipe.ingredients[i].quantity %> of <%= savedRecipe.ingredients[i].name %></li> 
 
                  <% } -%>
-               
-
 			</ul>
-			
-		</section>
-		<section>
-			 <h5> Go <a href="/recipes/<%= savedRecipe._id %>/edit">here</a> to add ingredients to your recipe!</h5>
 		</section>
 	</main>
 </body>
