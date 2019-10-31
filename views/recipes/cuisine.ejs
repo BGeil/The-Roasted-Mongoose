@@ -19,9 +19,9 @@
 	<hr/>
 	<h3>This is the list of cuisines</h3>
 	     <ul>
-          <% for(let i = 0; i < cuisineTypes.length ; i++){ %>
+          <% for(let i = 0; i < cuisineTypes.length; i++){ %>
               <li>
-                  <a href="/cuisine/"+i><%=cuisineTypes[i]%></a>
+                  <a href="/recipes/cuisine/<%=cuisineTypes[i]%>"> <%=cuisineTypes[i]%></a>
               </li>
           <% } %>
           </ul>

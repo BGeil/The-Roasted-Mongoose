@@ -17,7 +17,13 @@
 		<a href="/">logout</a>
 	</nav><br/>
 	<h3>This is the list of recipes</h3>
-   		
+		<ul>
+		<% for (let i = 0; i < foundRecipes.length; i++) { -%>
+			<li>
+			<a href="/recipes/show">foundRecipes[i]</a>
+		</li>
+		<% } -%>
+   		</ul>
 	</body>
 </html>
 <ul>

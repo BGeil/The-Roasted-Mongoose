@@ -4,16 +4,31 @@ const Recipe = require(`../models/recipe`)
 const User = require(`../models/user`)
 
 
+// RENDERS RECIPE LIST ROUTE
+router.get(`/recipesList`, (req, res) => {
+	res.render(`recipes/recipesList.ejs`)
+})
 
-router.get(`/cuisine/:type`, async (req, res, next) => {
+// RENDERS CUISINE RECIPE ROUTE
+router.get(`/cuisine/`, async (req, res, next) => {
 	try {
+		res.render('recipes/cuisine.ejs', {
+			cuisineTypes: Recipe.schema.path('cuisineType').enumValues,		
+		})
+	}
+	catch(err) {
+		next(err)
+	}
+})
 
-		// const foundRecipes = await Recipe.find({})
-
-
-		// res.render('some template', {
-		// 		recipes
-		// })
+// SHOWS LIST OF RECIPES BASED ON CUISINE TYPE
+router.get(`/cuisine/:cuisineType`, async (req, res, next) => {
+	try {
+		const foundRecipes = await Recipe.find({ cuisineType: req.params.cuisineType })
+		console.log(`\nthis is the foundRecipes in cuisine POST Route:`);
+		console.log(foundRecipes);
+		// render
+		res.send('under construction -- check terminal -- will be a list of cuisines')
 	}
 	catch(err) {
 		next(err)
@@ -21,29 +36,15 @@ router.get(`/cuisine/:type`, async (req, res, next) => {
 })
 
 
-// This Renders Added Recipe Route
-router.get(`/recipesList`, (req, res) => {
-	res.render(`recipes/recipesList.ejs`)
-})
 
 
-
-
-// Add/Edit Route
-// this will be the edit page route and will only be accesible
-// thru the user's profile page
+// NEW ROUTE FOR RECIPES
 router.get('/new', (req, res) => {
 	res.render('recipes/new.ejs', {
 		cuisineTypes: Recipe.schema.path('cuisineType').enumValues
-		// cuisine types
 	})
 	
 })
-// index ingredients
-// router.get(`/ingredientsShow`, async(req, res) => {
-	
-// 	res.render(`recipes/ingredientsShow.ejs`)
-// })
 
 
 // recipe show -- takes ID as a URL parameter, find the recipe w/ that id in DB,
@@ -61,7 +62,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 
-// creates recipe on new.ejs and redirects to SHOW page
+// ADDS RECIPE AND REDIRECTS TO SHOW PAGE
 router.post('/show', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
@@ -74,13 +75,10 @@ router.post('/show', async (req, res, next) => {
 	}
 })
 
-// this shows the page that can add ingreients to the recipe
+// EDIT ROUTE
 router.get('/:id/edit', async (req, res, next) => {
     try {
-        // similar func to recipe show --
-        // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
         const foundRecipe = await Recipe.findById(req.params.id)
-        // that form will post to the following route:
         res.render('recipes/edit.ejs', {
         	savedRecipe: foundRecipe,
         	cuisineTypes: Recipe.schema.path('cuisineType').enumValues
@@ -90,9 +88,6 @@ router.get('/:id/edit', async (req, res, next) => {
         next(err)
     }
 })
-
-
-
 //ADD INGREDIENTS ROUTE
 router.put(`/:id/ingredients`, async (req, res, next) => {
 	console.log(req.body);
@@ -126,10 +121,7 @@ router.put(`/:id`, async (req, res, next) => {
 // DELETE ROUTE FOR RECIPES
 router.delete('/:id', async (req, res, next) => {
 	try {
-
-		console.log('in delete route')
 		const deletedRecipe = await Recipe.findByIdAndRemove(req.params.id);
-		console.log(deletedRecipe);
 		res.redirect('/users/profile')
 	}
 	catch (err) {
@@ -139,25 +131,18 @@ router.delete('/:id', async (req, res, next) => {
 
 // DELETE ROUTE FOR INGREDIENTS
 router.delete('/:recipeId/ingredients/:indexOfIngredientInArray', async (req, res, next) => {
-	console.log("\nhere is req.params");
-	console.log(req.params);
 	try {
-		
 		const recipe = await Recipe.findById(req.params.recipeId);
-		console.log("\n here's the reipce we found");
-		console.log(recipe);
 		// splice out ingredient
 		recipe.ingredients.splice(req.params.indexOfIngredientInArray,1)
 		await recipe.save()
 		res.redirect(`/recipes/` + recipe._id  + `/edit#ingredients`)
-		
 	}
 	catch (err) {
 		next(err)
 	}
 })
-
-// this  the  ENTIRE RECIPE EDIT ROUTE
+// THIS IS THE ENTIRE RECIPE EDIT ROUTE
 router.get('/:id/editRecipe', async (req, res, next) => {
     try {
         const foundRecipe = await Recipe.findById(req.params.id)
@@ -170,17 +155,9 @@ router.get('/:id/editRecipe', async (req, res, next) => {
         next(err)
     }
 })
-
-
 // 4. 
 /// later: don't let people edit recipes unless they're the ones that created them
 // 4a. make the recipe page not work (redirect and show message "you can't") if it's not their recipe
 // 4b. only show edit link on show page if it's their recipe
-
-
-
-
-
-
 module.exports = router;
 
