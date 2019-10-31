@@ -1,6 +1,6 @@
 const mongoose = require(`mongoose`)
 
-const connectionString = `mongodb://localhost/roastedMongoose`
+const connectionString = process.env.MONGODB_URI
 
 mongoose.connect(connectionString, { 
 	useNewUrlParser: true,
@@ -11,11 +11,11 @@ mongoose.connect(connectionString, {
 
 
 mongoose.connection.on(`connected`,() => {
-	console.log(`Mongoose is connected to ${connectionString}`);
+	console.log(`connected to database: ${connectionString}`);
 })
 
 mongoose.connection.on(`disconnected`,() => {
-	console.log(`Mongoose is disconnected from ${connectionString}`);
+	console.log(`disconnected from database: ${connectionString}`);
 })
 
 mongoose.connection.on('error', (err) => {
