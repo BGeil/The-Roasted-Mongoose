@@ -116,14 +116,7 @@ router.put(`/:id`, async (req, res, next) => {
 	try {
 		console.log("this is req.body from upadating the whole recipe")
 		console.log(req.body)
-		// const newIngredient = {
-		// 	name: req.body.ingredients[0]
-		// 	quantity: req.body.ingredients[1]
-		// }
 
-		// const updatedRecipe = {
-			
-		// }
 		const findUpdatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {new:true});
 		console.log(`this is the findUpdatedRecipe variable in the update route`);
 		console.log(findUpdatedRecipe);
