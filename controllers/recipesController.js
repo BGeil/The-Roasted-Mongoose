@@ -91,7 +91,7 @@ router.get('/:id/edit', async (req, res, next) => {
 		console.log('this is for the edit recipe page');
 		const foundRecipe = await Recipe.findById(req.params.id)
 		// that form will post to the following route:
-		res.render('recipes/edit.ejs', {
+		res.render('users/edit.ejs', {
 			savedRecipe: foundRecipe
 		})
 	}
@@ -116,6 +116,19 @@ router.get('/:id/edit', async (req, res, next) => {
 // --> .save()
 // and redirects back to the recipe edit page 
 
+
+router.delete('/:id', async (req, res, next) => {
+	try {
+
+		console.log('in delete route')
+		const deletedRecipe = await Recipe.findByIdAndRemove(req.params.id);
+		console.log(deletedRecipe);
+		res.redirect('/users/profile')
+	}
+	catch (err) {
+		next(err)
+	}
+})
 
 // (pro tip)
 // (link on recipe edit page to say done --> link to show )

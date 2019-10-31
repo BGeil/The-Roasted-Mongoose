@@ -37,7 +37,10 @@
 		<ul>
 		<% for(let i = 0; i < allRecipes.length; i++){ %>
               <li>
-                  <a href="/allRecipes/<%=allRecipes[i]._id%>"><%=allRecipes[i].name%></a>
+              	<form action="/recipes/<%=allRecipes[i]._id%>?_method=DELETE" method="POST">
+                  <a href="/recipes/<%=allRecipes[i]._id%>"><%=allRecipes[i].name%></a>
+                  	<button value="DELETE">DELETE</button>
+                 </form>
               </li>
           <% } %>
         </ul>
