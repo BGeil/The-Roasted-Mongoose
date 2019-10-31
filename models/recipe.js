@@ -9,8 +9,8 @@ const cuisines = [`ITALIAN`, `MEXICAN`, `CHINESE`, `JAPANESE`, `FRENCH`]
 const recipeSchema = new mongoose.Schema({
 	name: String,
 	recipeImg: String,
-	serves: Number,
-	cost: Number,
+	serves: String,
+	cost: String,
 	cuisineType: {type: String,  enum: cuisines},
 	instructions: [String],
 	author: [{
@@ -21,25 +21,6 @@ const recipeSchema = new mongoose.Schema({
 })
 
 module.exports = mongoose.model(`Recipe`, recipeSchema)
-
-
-
-
-
-
-// const rec = await create. {
-// 	name: "tuna melt",
-// 	// ...
-// 	// ...
-// }
-
-
-// rec.ingredients.push({
-// 	name: 
-// 	quantity: 
-// })
-// await rec.save()
-
 
 
 

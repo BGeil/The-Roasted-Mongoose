@@ -40,7 +40,6 @@ router.get('/new', (req, res) => {
 // recipe show -- takes ID as a URL parameter, find the recipe w/ that id in DB,
 // and renders a template with that data from that recipe inserted 
 router.get('/:id', async (req, res, next) => {
-	console.log("\nwe just hit recipe show route, here's req.params.id", req.params.id);
 	try {
 		const foundRecipe = await Recipe.findById(req.params.id)
 		res.render(`recipes/show.ejs`, {
@@ -53,9 +52,7 @@ router.get('/:id', async (req, res, next) => {
 })
 
 
-
-
-// create recipe
+// creates recipe on new.ejs and redirects to SHOW page
 router.post('/show', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
@@ -81,40 +78,42 @@ router.post('/show', async (req, res, next) => {
 	}
 })
 
-
-// 1.
-// recipe edit (where you add ingredients) GET /recipes/edit/:id
+// this shows the page that can add ingreients to the recipe
 router.get('/:id/edit', async (req, res, next) => {
+    try {
+        // similar func to recipe show --
+        // also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
+        const foundRecipe = await Recipe.findById(req.params.id)
+        // that form will post to the following route:
+        res.render('recipes/edit.ejs', {
+        	savedRecipe: foundRecipe
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+})
+
+
+//  this page adds ingredients to the recipe
+//update route
+router.put(`/:id/ingredients`, async (req, res, next) => {
+	console.log(req.body);
 	try {
-		// similar func to recipe show --
-		// also renders template that shows existing info, like recipe show AND that has a form to add an ingredient
-		console.log('this is for the edit recipe page');
-		const foundRecipe = await Recipe.findById(req.params.id)
-		// that form will post to the following route:
-		res.render('users/edit.ejs', {
-			savedRecipe: foundRecipe
+		const recipe = await Recipe.findById(req.params.id)
+		recipe.ingredients.push({
+			name: req.body.name,
+			quantity: req.body.quantity
 		})
+		await recipe.save()
+		res.redirect(`/recipes/` + recipe._id  + `/edit`)
+
 	}
-	catch (err) {
+	catch(err) {
 		next(err)
 	}
 })
 
-
-// // 2. PUT /recipes/:id
-// router.put('/recipes/:id', async (req, res, next) => {
-// 	try {
-// 		console.log('');
-// 		const savedRecipe = await foundRecipe.save()
-// 	}
-// 	catch (err) {
-// 		next(err)
-// 	}
-// })
-// get the recipe from db
-// adds that ingredient (req.body) to that recipe (push)
-// --> .save()
-// and redirects back to the recipe edit page 
 
 
 router.delete('/:id', async (req, res, next) => {
@@ -133,6 +132,38 @@ router.delete('/:id', async (req, res, next) => {
 // (pro tip)
 // (link on recipe edit page to say done --> link to show )
 
+// this  the  ENTIRE RECIPE EDIT ROUTE
+router.get('/:id/editRecipe', async (req, res, next) => {
+    try {
+        const foundRecipe = await Recipe.findById(req.params.id)
+        res.render('recipes/editRecipe.ejs', {
+        	savedRecipe: foundRecipe,
+        	cuisineTypes: Recipe.schema.path('cuisineType').enumValues
+        })
+    }
+    catch (err) {
+        next(err)
+    }
+})
+// update route for Edit Recipe
+router.put(`/:id`, async (req, res, next) => {
+	try {
+		console.log("this is req.body from upadating the whole recipe")
+		console.log(req.body)
+
+		const findUpdatedRecipe = await Recipe.findByIdAndUpdate(req.params.id, req.body, {new:true});
+		console.log(`this is the findUpdatedRecipe variable in the update route`);
+		console.log(findUpdatedRecipe);
+
+		await findUpdatedRecipe.save()
+
+		res.redirect(`/recipes/` + findUpdatedRecipe._id)
+
+	}
+	catch(err) {
+		next(err)
+	}
+})
 
 // 3.
 // make the recipe edit page able to edit the other data as well
@@ -142,6 +173,9 @@ router.delete('/:id', async (req, res, next) => {
 /// later: don't let people edit recipes unless they're the ones that created them
 // 4a. make the recipe page not work (redirect and show message "you can't") if it's not their recipe
 // 4b. only show edit link on show page if it's their recipe
+
+
+
 
 
 
