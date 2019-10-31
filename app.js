@@ -26,7 +26,7 @@ app.use(session({
   resave: false, 
   saveUninitialized: false 
 }));
-
+const PORT = process.env.PORT
 
 
 
@@ -50,7 +50,7 @@ app.get(`/`, (req, res) => {
 
 
 
-const PORT = 3000;
+
 app.listen(PORT, () => {
 	`app is listening on PORT ${PORT}`
 })
