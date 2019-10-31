@@ -56,20 +56,7 @@ router.get('/:id', async (req, res, next) => {
 router.post('/show', async (req, res, next) => {
 	try {
 			const createdRecipe = await Recipe.create(req.body)
-		
-			console.log('-----------');
-			console.log(`created recipe in post route before saving`);
-			console.log(createdRecipe);
-			console.log('-------------');
-
-
 		 	const savedRecipe = await createdRecipe.save();
-		 	// req.session.savedRecipe = savedRecipe;
-
-		 	console.log('this is the saved recipe after creating in the post route');
-		 	console.log(savedRecipe);
-	
-		 	// redirect to /recipes/:id -- show page
 		 	res.redirect('/recipes/' + savedRecipe._id)
 
 		}
