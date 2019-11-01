@@ -98,7 +98,7 @@ router.put(`/:id`, async (req, res, next) => {
 		next(err)
 	}
 })
-// DELETE ROUTE FOR RECIPES
+// DELETE ROUTE FOR ENTIRE RECIPES
 router.delete('/:id', async (req, res, next) => {
 	try {
 		const deletedRecipe = await Recipe.findByIdAndRemove(req.params.id);
@@ -108,7 +108,7 @@ router.delete('/:id', async (req, res, next) => {
 		next(err)
 	}
 })
-// DELETE ROUTE FOR INGREDIENTS
+// DELETE ROUTE FOR INGREDIENTS IN EDIT PAGE
 router.delete('/:recipeId/ingredients/:indexOfIngredientInArray', async (req, res, next) => {
 	try {
 		const recipe = await Recipe.findById(req.params.recipeId);

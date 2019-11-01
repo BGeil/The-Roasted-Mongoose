@@ -70,4 +70,14 @@ router.get('/profile', async (req, res, next) => {
 		next(err)
 	}
 })
+// LOGOUT ROUTE
+router.get('/logout', (req, res) => {
+    req.session.destroy((err) => {
+        if(err){
+            res.send(err);
+        } else {
+            res.redirect('/users/login');
+        }
+    })
+})
 module.exports = router;

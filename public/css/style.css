@@ -1,6 +1,10 @@
 body {
-	background-color: #DED8cc;
+    background-color: #DED8cc;
 }
 li {
-	list-style-type: none;
+    list-style-type: none;
 }
+.cuisineType {
+	height: 30px;
+}
+

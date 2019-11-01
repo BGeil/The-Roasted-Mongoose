@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+		<meta charset="utf-8">
 		<title>The Roasted Mongoose</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
@@ -13,8 +14,9 @@
 		<a href="/users/profile">View Profile</a>
 		<a href="/users/login">login</a>
 		<a href="/recipes/new">Add Recipe </a>
-		<a href="/">logout</a>
-	</nav><br/>
+		<a href="/users/logout">logout</a>
+	</nav>
+	<hr/>
 	<h3>This is the list of <%=foundRecipes[0].cuisineType%> recipes</h3>
 	<ul>
 		<% for (let i = 0; i < foundRecipes.length; i++) { -%>

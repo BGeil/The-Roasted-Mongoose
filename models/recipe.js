@@ -1,7 +1,7 @@
 // Recipes Model
 const mongoose = require(`mongoose`)
 const Ingredient = require(`./ingredient.js`)
-const cuisines = [`ITALIAN`, `MEXICAN`, `CHINESE`, `JAPANESE`, `FRENCH`]
+const cuisines = [`ITALIAN 🇮🇹`, `MEXICAN 🇲🇽`, `CHINESE 🇨🇳`, `JAPANESE 🇯🇵`, `FRENCH 🇫🇷`]
 
 const recipeSchema = new mongoose.Schema({
 	name: String,
