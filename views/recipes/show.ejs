@@ -6,7 +6,7 @@
 	<link rel="stylesheet" type="text/css" href="/css/style.css">
 </head>
 <body>
-	<h1>Recipe Page</h1>
+	<h1>The Roasted Mongoose</h1><br/>
 	<nav>
 		<a href="/">Home</a>
 		<a href="/recipes/cuisine">Cuisines</a>
@@ -15,31 +15,25 @@
 	</nav>
 	<hr/>
 	<main>
-		<h3> Add Ingredients or Edit Recipe <a href="/recipes/<%= savedRecipe._id %>/edit">here</a></h5>
 		<section>
-			<ul>
-				
-				<h4>Recipe Name:</h4>
-				<li><%= savedRecipe.name %></li> 
-				<h4>Author goes here:</h4>
-				
-                <h4>Image:</h4>
-                <img src="<%= savedRecipe.recipeImg %>"> 
+				<h4><%= savedRecipe.name %></h4>
+                <img src="<%= savedRecipe.recipeImg%>"> 
                 <h4>Serves:</h4>
-                <li><%= savedRecipe.serves %></li> 
+                <h5><%= savedRecipe.serves%></h5>
                 <h4>Cost:</h4>
-                <li><%= savedRecipe.cost %></li> 
-                <h4>Cuisine Type:</h4>
-                <li><%= savedRecipe.cuisineType %></li> 
+                <h5><%= savedRecipe.cost %></h5> 
+                <h4>Cuisine:</h4>
+                <h5><%= savedRecipe.cuisineType %></h5> 
                 <h4>Instructions:</h4>
-                <li><%= savedRecipe.instructions %></li> 
+                <h5><%= savedRecipe.instructions %></h5> 
                  <h4>Ingredients:</h4>
                  <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
-                 	 <li><%= savedRecipe.ingredients[i].quantity %> of <%= savedRecipe.ingredients[i].name %></li> 
-
-                 <% } -%>
-			</ul>
+                 	 <h5>
+                 	 	<%= savedRecipe.ingredients[i].quantity %> of <%= savedRecipe.ingredients[i].name%>	
+                 	 </h5> 
+                 <% } -%>	
 		</section>
+		<h3> Add Ingredients or Edit Recipe <a href="/recipes/<%= savedRecipe._id %>/edit">here</a></h5>
 	</main>
 </body>
 </html>

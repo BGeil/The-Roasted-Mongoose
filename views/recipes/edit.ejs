@@ -1,72 +1,63 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Add Ingredients Page</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-</head>
-<body>
-	<h1>This Is The Add Ingredients Page</h1>
-	<nav>
-		<a href="/">Home</a>
-		<a href="/recipes/cuisine">Cuisines</a>
-		<a href="/recipes/new">Add Recipe </a>
-		<a href="/">logout</a>
-	</nav>
-	<hr/>
-	<main>
-		<section><br/>
-			<h3> return to<a href="/recipes/<%=savedRecipe._id%>"> Recipes</a> page</h3>
-			<form action="/recipes/<%= savedRecipe._id %>?_method=PUT" method="POST">
-				<h4>Recipe Name:</h4>
-				<input type="text" name="name" value="<%=savedRecipe.name%>"><br/>
-
-				<h4>Recipe Image:</h4>
-				<img src="<%= savedRecipe.recipeImg %>"> <br/>
-				<input type="text" name="recipeImg" value="<%=savedRecipe.recipeImg%>"><br/>
-
-				<h4>Serves:</h4>
-				<input type="text" name="serves" value="<%=savedRecipe.serves%>"><br/>
-
-				<h4>Cost:</h4>
-				<input type="text" name="cost" value="<%=savedRecipe.cost%>"><br/>
-				<h4>Cuisine</h4>
-				<select name="cuisineType" value="<%=savedRecipe.cuisineType%>">
-		              <% for(let i = 0; i < cuisineTypes.length; i++) { %>
-		                  <option value="<%=cuisineTypes[i]%>"><%=cuisineTypes[i]%></option>
-		              <% } %>
-				</select><br/>
-				<h4>Instructions:</h4>
-				<textarea name="instructions" value="<%=savedRecipe.instructions%>"></textarea><br/>
+	<head>
+		<title>The Roasted Mongoose</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
+	</head>
+	<body>
+		<h1>Add Ingredients Or Edit the Recipe!</h1>
+		<nav>
+			<a href="/">Home</a>
+			<a href="/recipes/cuisine">Cuisines</a>
+			<a href="/users/profile">View Profile</a>
+			<a href="/recipes/new">Add Recipe </a>
+			<a href="/">logout</a>
+		</nav>
+		<hr/>
+		<main>
+			<section><br/>
+				<h3>return to<a href="/recipes/<%=savedRecipe._id%>"> Recipes</a> page</h3>
+				<form action="/recipes/<%= savedRecipe._id %>?_method=PUT" method="POST">
+					<h4>Recipe Name:</h4>
+					<input type="text" name="name" value="<%=savedRecipe.name%>"><br/>
+					<h4>Recipe Image:</h4>
+					<img src="<%= savedRecipe.recipeImg %>"> <br/>
+					<input type="text" name="recipeImg" value="<%=savedRecipe.recipeImg%>"><br/>
+					<h4>Serves:</h4>
+					<input type="text" name="serves" value="<%=savedRecipe.serves%>"><br/>
+					<h4>Cost:</h4>
+					<input type="text" name="cost" value="<%=savedRecipe.cost%>"><br/>
+					<h4>Cuisine</h4>
+					<select name="cuisineType" value="<%=savedRecipe.cuisineType%>">
+			              <% for(let i = 0; i < cuisineTypes.length; i++) { %>
+			                  <option value="<%=cuisineTypes[i]%>"><%=cuisineTypes[i]%></option>
+			              <% } %>
+					</select><br/>
+					<h4>Instructions:</h4>
+					<textarea name="instructions" value="<%=savedRecipe.instructions%>"></textarea><br/>
 					<button>UpdateRecipe</button>
-			</form><hr/>
-			<h4 id="ingredients">Ingredients:</h4>
-            <ul>
-                 <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
-                 	 <li>
-                 	 	<form action="/recipes/<%=savedRecipe._id%>/ingredients/<%= i %>?_method=DELETE" method="POST">
-
-	                 	 	<%= savedRecipe.ingredients[i].quantity %> of <%= savedRecipe.ingredients[i].name %>
-
-	                 	 	<button value="DELETE">delete</button>
-
-                 		</form>
-                 	</li> 
-
-                 <% } -%>
-               
-			</ul>
-		</section>
-
-		<!--  This section will push ingredients into recipe -->
-		<section>
-			<form action="/recipes/<%= savedRecipe._id %>/ingredients?_method=PUT" method="POST">
-				<!-- pushing name of ingred and quantity -->
-				<input type="text" name="quantity" placeholder="quantity">
- 				<input type="text" name="name" placeholder="name"><br/>
-				<button>Add Ingredient</button>
-			</form>
-		</section>
-	</main>
-</body>
+				</form><hr/>
+				<h4 id="ingredients">Ingredients:</h4>
+	            <ul>
+	                 <% for (let i = 0; i < savedRecipe.ingredients.length; i++) { -%>
+	                 	 <li>
+	                 	 	<form action="/recipes/<%=savedRecipe._id%>/ingredients/<%= i %>?_method=DELETE" method="POST">
+		                 	 	<%= savedRecipe.ingredients[i].quantity %> of <%= savedRecipe.ingredients[i].name %>
+		                 	 	<button value="DELETE">delete</button>
+	                 		</form>
+	                 	</li> 
+	                 <% } -%>	    
+				</ul>
+			</section>
+			<section>
+				<form action="/recipes/<%= savedRecipe._id %>/ingredients?_method=PUT" method="POST">
+					<!-- pushing name of ingred and quantity -->
+					<input type="text" name="quantity" placeholder="quantity">
+	 				<input type="text" name="name" placeholder="name"><br/>
+					<button>Add Ingredient</button>
+				</form>
+			</section>
+		</main>
+	</body>
 </html>

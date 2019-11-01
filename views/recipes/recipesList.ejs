@@ -1,12 +1,11 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Roasted Mongoose</title>
+		<title>The Roasted Mongoose</title>
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
 		<link rel="stylesheet" type="text/css" href="/css/style.css">
 	</head>
 	<body>
-
 	<h1>The Roasted Mongoose</h1><br/>
 	<nav>
 		<a href="/">Home</a>
@@ -16,15 +15,15 @@
 		<a href="/recipes/new">Add Recipe </a>
 		<a href="/">logout</a>
 	</nav><br/>
-	<h3>This is the list of recipes</h3>
-		<ul>
+	<h3>This is the list of <%=foundRecipes[0].cuisineType%> recipes</h3>
+	<ul>
 		<% for (let i = 0; i < foundRecipes.length; i++) { -%>
-			<li>
+		<li>
 			<a href="/recipes/<%= foundRecipes[i]._id %>"><%=foundRecipes[i].name%></a>
 		</li>
 		<% } -%>
-   		</ul>
+	</ul>
 	</body>
 </html>
-<ul>
+
         

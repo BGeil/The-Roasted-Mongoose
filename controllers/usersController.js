@@ -4,15 +4,10 @@ const User = require(`../models/user`)
 const Recipe = require(`../models/recipe`)
 const bcrypt = require(`bcryptjs`)
 
-
-// Login Route
+// RENDERS LOGIN ROUTE
 router.get(`/login`, (req, res) => {
 	res.render(`users/login.ejs`)
 })
-
-// this checks to see if there an existing username and password
-// if true, the user is logged in
-// if false they ger redirected back to the login pa
 router.post(`/login`, async (req, res, next) => {
 	try {
 		const foundUser = await User.findOne({username: req.body.username});
@@ -23,9 +18,8 @@ router.post(`/login`, async (req, res, next) => {
 				req.session.logged = true;
 				console.log('password correct');
 				res.redirect(`/users/profile`)
-
 			}
-			else{
+			else {
 				console.log(`Username or password is incorrect`);
 				req.session.message = `Username or password is incorrect`;
 				res.redirect(`/users/login`)
@@ -41,14 +35,11 @@ router.post(`/login`, async (req, res, next) => {
 		next(err)
 	}
 })
-
-
-// Register Route
+// RENDERS REGISTER ROUTE
 router.get(`/register`, (req, res) => {
 	res.render(`users/register.ejs`)
 })
-
-// Stores New User in the DB
+// STORES REGISTER USER INTO DB
 router.post(`/register`, async (req, res, next) => {
 	const password = req.body.password
 	const encryptedPassword = bcrypt.hashSync(password, bcrypt.genSaltSync(10))
@@ -67,14 +58,7 @@ router.post(`/register`, async (req, res, next) => {
 	}
 
 })
-
-
-
-// Profile route
-// Displays all recipes add by the logged in user
-
-// this will navigate to the profile page when the
-// view profile  link on the nav bar is clicked
+// PROFILE ROUTE
 router.get('/profile', async (req, res, next) => {
 	try {
 		const allRecipes =  await Recipe.find()
@@ -86,8 +70,4 @@ router.get('/profile', async (req, res, next) => {
 		next(err)
 	}
 })
-
-
-
 module.exports = router;
-

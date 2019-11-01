@@ -3,35 +3,34 @@
 # Recipes Full Stack Applicaton
 
 # MVP
-  
-  - Users Can Search Site for recipes.
 
-  - Users browse by cuisine.
+  - Users can browse recipes by cuisine.
 
-  - User can log in and add/edit recipes.
-
-  - Logged in users have a “show” page, to show off recipes they added.
-
-  - Logged in users can favorite recipes
-
-  - Logged in users will have a profile page.
-
-  - Profile pages of logged in users will have :
-
-  	- Profile Picture
-
-  	- Bio
-
-  	- Recipes they added
-
-  	- Favorited recipes
-
-  	- Add/Edit Recipes they added
+  - Users can register and log in
 
   - Guest users can only view recipes.
 
+  - Logged in users will have a profile page.
 
+  - Logged in users profile page will show all the recipes they added.
+
+  - Only Logged in Users can add, edit, and delete recipes.
+
+  	
 # Stretch Goals
+
+
+ - Users Can Search Site for recipes.
+
+    - Profile pages of logged in users will have :
+
+    - Profile Picture
+
+    - Bio
+
+    - Show a list of Favorited recipes
+
+  - Logged in users can favorite recipes
 
   - There will be a chef or user log in.
   

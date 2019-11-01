@@ -1,50 +1,31 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>User Profile</title>
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
-	<link rel="stylesheet" type="text/css" href="/css/style.css">
-</head>
-<body>
-	<h1>This Is The User's Profile Page</h1>
+	<head>
+		<title>User Profile</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.css" integrity="sha256-Nfu23DiRqsrx/6B6vsI0T9vEVKq1M6KgO8+TV363g3s=" crossorigin="anonymous" />
+		<link rel="stylesheet" type="text/css" href="/css/style.css">
+	</head>
+	<body>
+		<h1>The Roasted Mongoose</h1><br/>
 		<nav>
 			<a href="/">Home</a>
 			<a href="/recipes/cuisine">Cuisines</a>
 			<a href="/recipes/new">Add Recipe </a>
 			<a href="/">logout</a>
 		</nav>
-	<!-- User's username will go here -->
-
-
-	<!-- This is the user's bio -->
-	
-
-	<div>
-	<!-- User's image will go here and will be to the right of the username and bio -->
-	</div>
-
-
-	<!-- the following section is the recipes section. It will contain
-	a loop displaying all of the recipes the user has posted. -->
-	<section>
-		<h3>Recipes Posted By You</h3>
-		<br/>
-		<div>
-		<!-- This will be a link to the add recipe page -->
-		<a href="/recipes/new">Add Recipe </a>
-		</div>
-		<br/>
-		<ul>
-		<% for(let i = 0; i < allRecipes.length; i++){ %>
-              <li>
-              	<form action="/recipes/<%=allRecipes[i]._id%>?_method=DELETE" method="POST">
-                  <a href="/recipes/<%=allRecipes[i]._id%>"><%=allRecipes[i].name%></a>
-                  	<button value="DELETE">DELETE</button>
-                 </form>
-              </li>
-          <% } %>
-        </ul>
-	</section>
-
-</body>
+		<section>
+			<h3>Recipes Posted By You</h3>
+			<br/>
+			<ul>
+			<% for(let i = 0; i < allRecipes.length; i++){ %>
+	              <li>
+	              	<form action="/recipes/<%=allRecipes[i]._id%>?_method=DELETE" method="POST">
+	                  <a href="/recipes/<%=allRecipes[i]._id%>"><%=allRecipes[i].name%></a>
+	                  	<button value="DELETE">DELETE</button>
+	                 </form>
+	              </li>
+	          <% } %>
+	        </ul>
+		</section>
+	</body>
 </html>
